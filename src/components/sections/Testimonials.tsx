@@ -25,6 +25,16 @@ export default function Testimonials() {
   const prefersReducedMotion = useReducedMotion();
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const handlePrev = () => {
+    setDirection(-1);
+    setIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setDirection(1);
+    setIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     
@@ -41,16 +51,6 @@ export default function Testimonials() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [index, prefersReducedMotion]);
-
-  const handlePrev = () => {
-    setDirection(-1);
-    setIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setDirection(1);
-    setIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
-  };
 
   const slideVariants = {
     enter: (dir: number) => ({
@@ -110,7 +110,7 @@ export default function Testimonials() {
                 className="space-y-6"
               >
                  <p className="text-[var(--foreground)] text-sm md:text-base font-light italic leading-relaxed pl-1">
-                  "{testimonials[index].text}"
+                  &ldquo;{testimonials[index].text}&rdquo;
                 </p>
                 
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-4 border-t border-[var(--border)]">

@@ -33,27 +33,25 @@ function WireframeBox({ position, size, speed, color }: { position: [number, num
   );
 }
 
+// Global particle cache to satisfy React 19 render purity rules
+const PARTICLE_COUNT = 1000;
+const PARTICLE_POSITIONS = new Float32Array(PARTICLE_COUNT * 3);
+const PARTICLE_COLORS = new Float32Array(PARTICLE_COUNT * 3);
+
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  PARTICLE_POSITIONS[i * 3] = (Math.random() - 0.5) * 24;     // x
+  PARTICLE_POSITIONS[i * 3 + 1] = (Math.random() - 0.5) * 24; // y
+  PARTICLE_POSITIONS[i * 3 + 2] = (Math.random() - 0.5) * 35; // z
+
+  const mix = Math.random();
+  PARTICLE_COLORS[i * 3] = mix * 0.6 + 0.1;      // R (magenta tint)
+  PARTICLE_COLORS[i * 3 + 1] = (1 - mix) * 0.5 + 0.2;  // G (cyan tint)
+  PARTICLE_COLORS[i * 3 + 2] = 0.9;              // B (blue base)
+}
+
 // Drifting dust particles field
 function ParticleField() {
   const pointsRef = useRef<THREE.Points>(null);
-  const count = 1000;
-
-  const [positions, colors] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const cols = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 24;     // x
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 24; // y
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 35; // z
-
-      // Gradient color mix (cyan and magenta/purple)
-      const mix = Math.random();
-      cols[i * 3] = mix * 0.6 + 0.1;      // R (magenta tint)
-      cols[i * 3 + 1] = (1 - mix) * 0.5 + 0.2;  // G (cyan tint)
-      cols[i * 3 + 2] = 0.9;              // B (blue base)
-    }
-    return [pos, cols];
-  }, []);
 
   useFrame((state) => {
     if (pointsRef.current) {
@@ -68,11 +66,11 @@ function ParticleField() {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          args={[positions, 3]}
+          args={[PARTICLE_POSITIONS, 3]}
         />
         <bufferAttribute
           attach="attributes-color"
-          args={[colors, 3]}
+          args={[PARTICLE_COLORS, 3]}
         />
       </bufferGeometry>
       <pointsMaterial
@@ -149,6 +147,7 @@ function CameraController({ mouse }: { mouse: React.MutableRefObject<{ x: number
 
     // Camera moves forward from Z=6 to Z=-15
     const targetZ = 6 - scrollProgress * 25;
+    /* eslint-disable react-hooks/immutability */
     camera.position.z = THREE.MathUtils.lerp(camera.position.z, targetZ, 0.08);
 
     // 2. Mouse parallax coordinates (X and Y coordinates)
@@ -159,6 +158,7 @@ function CameraController({ mouse }: { mouse: React.MutableRefObject<{ x: number
 
     // Always look slightly forward along the scene depth
     camera.lookAt(0, 0, camera.position.z - 5);
+    /* eslint-enable react-hooks/immutability */
   });
 
   return null;

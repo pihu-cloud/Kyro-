@@ -24,6 +24,13 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
   const glowX = useTransform(x, [-0.5, 0.5], ["0%", "100%"]);
   const glowY = useTransform(y, [-0.5, 0.5], ["0%", "100%"]);
 
+  // Transformed glow radial gradient background - placed before early return to obey Rules of Hooks
+  const glowBackground = useTransform(
+    [glowX, glowY],
+    ([gx, gy]) =>
+      `radial-gradient(circle 250px at ${gx} ${gy}, rgba(255, 255, 255, 0.08), transparent 80%)`
+  );
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -79,11 +86,7 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
       <motion.div
         className="absolute inset-0 pointer-events-none rounded-[inherit] z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{
-          background: useTransform(
-            [glowX, glowY],
-            ([gx, gy]) =>
-              `radial-gradient(circle 250px at ${gx} ${gy}, rgba(255, 255, 255, 0.08), transparent 80%)`
-          ),
+          background: glowBackground,
         }}
       />
     </motion.div>

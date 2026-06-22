@@ -14,7 +14,6 @@ function StatCounter({ value, title, suffix = "" }: { value: number; title: stri
 
   useEffect(() => {
     if (isInView) {
-      let start = 0;
       const end = value;
       const duration = 1500; // 1.5s
       const steps = 50;

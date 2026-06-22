@@ -80,14 +80,14 @@ export default function Contact() {
                 GET IN TOUCH
               </span>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-[var(--foreground)] mt-2">
-                Let's start
+                Let&apos;s start
                 <br />
                 something great.
               </h2>
             </div>
             
             <p className="text-[var(--muted-text)] font-light text-sm leading-relaxed">
-              Have an upcoming product concept, complex backend stack optimization, or a redesign idea? Send us a message and we'll reply within 24 hours.
+              Have an upcoming product concept, complex backend stack optimization, or a redesign idea? Send us a message and we&apos;ll reply within 24 hours.
             </p>
 
             {/* Social Links */}

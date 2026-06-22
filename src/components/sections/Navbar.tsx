@@ -144,7 +144,7 @@ export default function Navbar() {
                 onClick={(e) => handleLinkClick(e, "#contact")}
                 className="px-5 py-2 text-xs font-bold font-mono tracking-widest uppercase rounded-full border border-[var(--border)] dark:border-violet-500/30 text-[var(--foreground)] hover:bg-black/5 dark:hover:bg-violet-600/10 hover:border-[var(--border-hover)] dark:hover:border-violet-400 transition-all duration-300"
               >
-                Let's Build
+                Let&apos;s Build
               </a>
             </Magnetic>
           </div>
