@@ -9,6 +9,7 @@ export default function Contact() {
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">("idle");
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({ name: "", email: "", message: "" });
+  const [submitError, setSubmitError] = useState("");
   
   const validateForm = () => {
     let valid = true;
@@ -36,28 +37,50 @@ export default function Contact() {
     return valid;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setFormState("submitting");
+    setSubmitError("");
 
-    // Simulate API request
-    setTimeout(() => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to send message. Please try again.");
+      }
+
       setFormState("success");
       setFormData({ name: "", email: "", message: "" });
       
       // Reset back to idle after a few seconds
       setTimeout(() => {
         setFormState("idle");
-      }, 5000);
-    }, 1500);
+      }, 6000);
+    } catch (err: unknown) {
+      console.error("Submission error:", err);
+      setFormState("idle");
+      const errorMsg = err instanceof Error ? err.message : "Failed to transmit message. Please verify configuration.";
+      setSubmitError(errorMsg);
+    }
   };
 
   const handleInputChange = (field: keyof typeof formData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+    if (submitError) {
+      setSubmitError("");
     }
   };
 
@@ -236,6 +259,13 @@ export default function Contact() {
                         <span className="text-[10px] font-mono text-red-400 mt-1">{errors.message}</span>
                       )}
                     </div>
+
+                    {/* Error display */}
+                    {submitError && (
+                      <div className="text-[11px] font-mono text-red-400 mt-2 bg-red-950/20 border border-red-500/25 px-3 py-2 rounded-xl">
+                        {submitError}
+                      </div>
+                    )}
 
                     {/* Submit Button */}
                     <div className="pt-2">
