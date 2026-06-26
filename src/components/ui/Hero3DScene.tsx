@@ -295,6 +295,7 @@ const SERVICE_MESH_SNIPPET = [
 
 export default function Hero3DScene() {
   const mouse = useRef({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -302,7 +303,17 @@ export default function Hero3DScene() {
       mouse.current.y = (e.clientY / window.innerHeight) - 0.5;
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", checkMobile);
+    };
   }, []);
 
   return (
@@ -326,43 +337,47 @@ export default function Hero3DScene() {
         {/* Node connections */}
         <NeuralNetworkMesh />
 
-        {/* Floating HTML Terminals mapped in 3D */}
-        <Floating3DPanel
-          position={[-3, 1, -1]}
-          rotation={[0, 0.2, 0]}
-          scale={0.9}
-          codeLines={AUTH_CODE_SNIPPET}
-          title="auth_gateway.ts"
-          lang="TypeScript"
-          glowColor="cyan"
-        />
-        <Floating3DPanel
-          position={[3.2, -1.2, -3]}
-          rotation={[0, -0.2, 0]}
-          scale={0.9}
-          codeLines={ANIMATION_CODE_SNIPPET}
-          title="ux_interactions.ts"
-          lang="TypeScript"
-          glowColor="purple"
-        />
-        <Floating3DPanel
-          position={[-3.5, -2, -5.5]}
-          rotation={[0.1, 0.3, -0.05]}
-          scale={0.85}
-          codeLines={DB_CODE_SNIPPET}
-          title="client_model.js"
-          lang="JavaScript"
-          glowColor="purple"
-        />
-        <Floating3DPanel
-          position={[2.8, 1.8, -8]}
-          rotation={[-0.05, -0.3, 0]}
-          scale={0.85}
-          codeLines={SERVICE_MESH_SNIPPET}
-          title="mesh_gateway.py"
-          lang="Python"
-          glowColor="cyan"
-        />
+        {/* Floating HTML Terminals mapped in 3D (Hidden on Mobile for performance & clean layout) */}
+        {!isMobile && (
+          <>
+            <Floating3DPanel
+              position={[-3, 1, -1]}
+              rotation={[0, 0.2, 0]}
+              scale={0.9}
+              codeLines={AUTH_CODE_SNIPPET}
+              title="auth_gateway.ts"
+              lang="TypeScript"
+              glowColor="cyan"
+            />
+            <Floating3DPanel
+              position={[3.2, -1.2, -3]}
+              rotation={[0, -0.2, 0]}
+              scale={0.9}
+              codeLines={ANIMATION_CODE_SNIPPET}
+              title="ux_interactions.ts"
+              lang="TypeScript"
+              glowColor="purple"
+            />
+            <Floating3DPanel
+              position={[-3.5, -2, -5.5]}
+              rotation={[0.1, 0.3, -0.05]}
+              scale={0.85}
+              codeLines={DB_CODE_SNIPPET}
+              title="client_model.js"
+              lang="JavaScript"
+              glowColor="purple"
+            />
+            <Floating3DPanel
+              position={[2.8, 1.8, -8]}
+              rotation={[-0.05, -0.3, 0]}
+              scale={0.85}
+              codeLines={SERVICE_MESH_SNIPPET}
+              title="mesh_gateway.py"
+              lang="Python"
+              glowColor="cyan"
+            />
+          </>
+        )}
 
         {/* Scroll and mouse tracking controller */}
         <CameraController mouse={mouse} />

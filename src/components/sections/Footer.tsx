@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUp, Sparkles, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUp, Sparkles, Mail } from "lucide-react";
 import Magnetic from "../ui/Magnetic";
 import Logo from "../ui/Logo";
 
@@ -105,28 +105,6 @@ export default function Footer() {
 
           {/* Social icons */}
           <div className="flex gap-4">
-            <Magnetic>
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="hover:text-[var(--foreground)] transition-colors"
-                aria-label="GitHub"
-              >
-                <Github size={16} />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="hover:text-[var(--foreground)] transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={16} />
-              </a>
-            </Magnetic>
             <Magnetic>
               <a 
                 href="mailto:kyro.builds306@gmail.com" 

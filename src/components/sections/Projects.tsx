@@ -378,9 +378,11 @@ export default function Projects() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1.5 text-xs font-mono text-cyan-400"
+                        className={`flex items-center gap-1.5 text-xs font-mono transition-colors duration-200 ${
+                          project.title.includes("Sterling") ? "text-cyan-400 hover:text-cyan-300" : "text-violet-400 hover:text-violet-300"
+                        }`}
                       >
-                        <span>DEMO</span>
+                        <span>LIVE PLATFORM</span>
                         <ExternalLink size={12} />
                       </a>
                     </div>

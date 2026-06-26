@@ -69,8 +69,8 @@ const SERVICE_MESH_SNIPPET = [
 
 
 export default function Hero() {
-  const headlinePart1 = Array.from("Design that thinks.");
-  const headlinePart2 = Array.from("Code that scales.");
+  const headlinePart1 = "Design that thinks.".split(" ");
+  const headlinePart2 = "Code that scales.".split(" ");
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -180,27 +180,45 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-6xl md:text-8.5xl font-bold tracking-tight text-[var(--foreground)] max-w-5xl leading-[1.08] flex flex-col items-center select-none drop-shadow-[0_4px_16px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
             {/* Line 1 */}
             <span className="flex flex-wrap justify-center overflow-hidden py-1">
-              {headlinePart1.map((char, idx) => (
-                <span key={idx} className="inline-flex overflow-hidden py-1">
-                  <motion.span
-                    variants={letterVariants}
-                    className="inline-block"
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+              {headlinePart1.map((word, wordIdx) => (
+                <span key={wordIdx} className="flex flex-row">
+                  <span className="inline-block whitespace-nowrap">
+                    {word.split("").map((char, charIdx) => (
+                      <span key={charIdx} className="inline-flex overflow-hidden py-1">
+                        <motion.span
+                          variants={letterVariants}
+                          className="inline-block"
+                        >
+                          {char}
+                        </motion.span>
+                      </span>
+                    ))}
+                  </span>
+                  {wordIdx < headlinePart1.length - 1 && (
+                    <span className="inline-block">&nbsp;</span>
+                  )}
                 </span>
               ))}
             </span>
             {/* Line 2 */}
             <span className="flex flex-wrap justify-center overflow-hidden py-1 text-animate-gradient">
-              {headlinePart2.map((char, idx) => (
-                <span key={idx} className="inline-flex overflow-hidden py-1">
-                  <motion.span
-                    variants={letterVariants}
-                    className="inline-block"
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+              {headlinePart2.map((word, wordIdx) => (
+                <span key={wordIdx} className="flex flex-row">
+                  <span className="inline-block whitespace-nowrap">
+                    {word.split("").map((char, charIdx) => (
+                      <span key={charIdx} className="inline-flex overflow-hidden py-1">
+                        <motion.span
+                          variants={letterVariants}
+                          className="inline-block"
+                        >
+                          {char}
+                        </motion.span>
+                      </span>
+                    ))}
+                  </span>
+                  {wordIdx < headlinePart2.length - 1 && (
+                    <span className="inline-block">&nbsp;</span>
+                  )}
                 </span>
               ))}
             </span>

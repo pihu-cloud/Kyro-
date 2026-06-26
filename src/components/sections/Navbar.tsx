@@ -165,7 +165,6 @@ export default function Navbar() {
       </header>
 
 
-      {/* Mobile drawer overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -173,10 +172,10 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: "-100%" }}
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 bg-[#f8fafc]/98 dark:bg-[#050816]/98 backdrop-blur-xl z-40 flex flex-col justify-center px-8 transition-colors duration-500"
+            className="fixed inset-0 bg-[#030014]/98 backdrop-blur-xl z-40 flex flex-col justify-center px-8 transition-colors duration-500"
           >
             <div className="flex flex-col gap-6 text-left max-w-sm mx-auto w-full">
-              <div className="flex justify-between items-center border-b border-slate-200 dark:border-white/5 pb-4">
+              <div className="flex justify-between items-center border-b border-[var(--border)] pb-4">
                 <span className="text-xs font-mono tracking-widest text-violet-400 uppercase">
                   NAVIGATION
                 </span>
@@ -195,7 +194,7 @@ export default function Navbar() {
                       className={`text-3xl font-bold font-sans tracking-tight uppercase flex items-center justify-between ${
                         activeSection === link.href.replace("#", "")
                           ? "text-[var(--foreground)]"
-                          : "text-slate-400 dark:text-gray-500 hover:text-[var(--foreground)]"
+                          : "text-[var(--muted-text)] hover:text-[var(--foreground)]"
                       }`}
                     >
                       <span>{link.name}</span>
@@ -211,18 +210,13 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.4 }}
-                className="mt-8 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col gap-4 font-mono text-sm text-[var(--muted-text)]"
+                className="mt-8 pt-8 border-t border-[var(--border)] flex flex-col gap-4 font-mono text-sm text-[var(--muted-text)]"
               >
                 <div>
                   <span className="text-violet-400 font-semibold">Email:</span>{" "}
                   <a href="mailto:kyro.builds306@gmail.com" className="hover:text-[var(--foreground)] transition-colors duration-200">
                     kyro.builds306@gmail.com
                   </a>
-                </div>
-                <div className="flex gap-4 text-xs tracking-widest uppercase">
-                  <a href="#" className="hover:text-[var(--foreground)] transition-colors duration-200">GitHub</a>
-                  <a href="#" className="hover:text-[var(--foreground)] transition-colors duration-200">LinkedIn</a>
-                  <a href="#" className="hover:text-[var(--foreground)] transition-colors duration-200">Dribbble</a>
                 </div>
               </motion.div>
             </div>
