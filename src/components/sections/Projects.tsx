@@ -7,12 +7,12 @@ import TiltCard from "../ui/TiltCard";
 
 const projects = [
   {
-    title: "Sterling Wholesale Insurance Portal",
-    description: "A California-focused wholesale insurance portal enabling agencies to submit risks, receive quotes, finance policies, sign documents, and bind coverage in one integrated system.",
+    title: "Sterling Insurance Portal",
+    description: "A California wholesale insurance portal enabling agencies to submit risks, receive quotes, finance policies, and bind coverage in one integrated system.",
     features: [
-      "CA-specific templates (Restaurant, Contractor, Trucking)",
-      "Intelligent multi-carrier submission routing",
-      "Sterling Payment Solutions (ACH/Card) & EMI finance calculator",
+      "CA-specific templates (Restaurant, Contractor, etc.)",
+      "Intelligent multi-carrier risk routing",
+      "Integrated ACH/Card payments & EMI calculator",
     ],
     tech: ["Next.js 14", "TypeScript", "MongoDB", "NextAuth.js", "Tailwind CSS", "Zod"],
     liveUrl: "https://sterling-insurance-enpgjv8na-divyam-sainis-projects.vercel.app/signin",
@@ -117,8 +117,12 @@ export default function Projects() {
   const rotateY2 = useTransform(scrollYProgress, [0.15, 0.75], [-15, 0]);
   const opacity2 = useTransform(scrollYProgress, [0.15, 0.25, 0.75], [0, 0.35, 1]);
 
+  // Dynamic Z-indices to ensure the active card is always on top and clickable
+  const zIndex1 = useTransform(scrollYProgress, [0, 0.4, 0.45], [20, 20, 10]);
+  const zIndex2 = useTransform(scrollYProgress, [0, 0.4, 0.45], [10, 10, 20]);
+
   return (
-    <>
+    <section id="projects" className="relative">
       {/* Desktop Sticky 3D Stacking Gallery */}
       <div
         ref={containerRef}
@@ -161,9 +165,10 @@ export default function Projects() {
                   scale: scale1,
                   rotateY: rotateY1,
                   opacity: opacity1,
+                  zIndex: zIndex1,
                   transformStyle: "preserve-3d"
                 }}
-                className="absolute w-[800px] h-[460px] z-20"
+                className="absolute w-[800px] h-[460px]"
               >
                 <TiltCard className="h-full group">
                   <div className="gradient-border-card overflow-hidden flex h-full backdrop-blur-md">
@@ -173,10 +178,10 @@ export default function Projects() {
                     </div>
                     
                     {/* Right: Details */}
-                    <div className="w-[50%] p-10 flex flex-col justify-between">
+                    <div className="w-[50%] p-8 flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center gap-3.5 mb-5">
-                          <div className="p-2.5 bg-[var(--border)] rounded-xl border border-[var(--border)]">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="p-2 bg-[var(--border)] rounded-xl border border-[var(--border)]">
                             {projects[0].icon}
                           </div>
                           <h3 className="text-2xl font-bold text-[var(--foreground)] group-hover:text-cyan-300 transition-colors duration-300">
@@ -184,11 +189,11 @@ export default function Projects() {
                           </h3>
                         </div>
                         
-                        <p className="text-[var(--muted-text)] text-xs font-light leading-relaxed mb-6">
+                        <p className="text-[var(--muted-text)] text-xs font-light leading-relaxed mb-4">
                           {projects[0].description}
                         </p>
 
-                        <ul className="space-y-3 mb-6">
+                        <ul className="space-y-2 mb-4">
                           {projects[0].features.map((feat) => (
                             <li key={feat} className="flex items-center gap-2.5 text-xs text-[var(--muted-text)] font-mono">
                               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
@@ -198,7 +203,7 @@ export default function Projects() {
                         </ul>
                       </div>
 
-                      <div className="space-y-4 pt-4 border-t border-[var(--border)]">
+                      <div className="space-y-3 pt-3 border-t border-[var(--border)]">
                         <div className="flex flex-wrap gap-1.5">
                           {projects[0].tech.map((tag) => (
                             <span
@@ -237,9 +242,10 @@ export default function Projects() {
                   scale: scale2,
                   rotateY: rotateY2,
                   opacity: opacity2,
+                  zIndex: zIndex2,
                   transformStyle: "preserve-3d"
                 }}
-                className="absolute w-[800px] h-[460px] z-10"
+                className="absolute w-[800px] h-[460px]"
               >
                 <TiltCard className="h-full group">
                   <div className="gradient-border-card overflow-hidden flex h-full backdrop-blur-md">
@@ -249,10 +255,10 @@ export default function Projects() {
                     </div>
                     
                     {/* Right: Details */}
-                    <div className="w-[50%] p-10 flex flex-col justify-between">
+                    <div className="w-[50%] p-8 flex flex-col justify-between">
                       <div>
-                        <div className="flex items-center gap-3.5 mb-5">
-                          <div className="p-2.5 bg-[var(--border)] rounded-xl border border-[var(--border)]">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="p-2 bg-[var(--border)] rounded-xl border border-[var(--border)]">
                             {projects[1].icon}
                           </div>
                           <h3 className="text-2xl font-bold text-[var(--foreground)] group-hover:text-violet-300 transition-colors duration-300">
@@ -260,11 +266,11 @@ export default function Projects() {
                           </h3>
                         </div>
                         
-                        <p className="text-[var(--muted-text)] text-xs font-light leading-relaxed mb-6">
+                        <p className="text-[var(--muted-text)] text-xs font-light leading-relaxed mb-4">
                           {projects[1].description}
                         </p>
 
-                        <ul className="space-y-3 mb-6">
+                        <ul className="space-y-2 mb-4">
                           {projects[1].features.map((feat) => (
                             <li key={feat} className="flex items-center gap-2.5 text-xs text-[var(--muted-text)] font-mono">
                               <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
@@ -274,7 +280,7 @@ export default function Projects() {
                         </ul>
                       </div>
 
-                      <div className="space-y-4 pt-4 border-t border-[var(--border)]">
+                      <div className="space-y-3 pt-3 border-t border-[var(--border)]">
                         <div className="flex flex-wrap gap-1.5">
                           {projects[1].tech.map((tag) => (
                             <span
@@ -385,6 +391,6 @@ export default function Projects() {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }

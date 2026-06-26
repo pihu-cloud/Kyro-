@@ -1,14 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { 
   ArrowLeft, Github, Mail, MapPin, Calendar, Award, BookOpen, Briefcase, 
-  Terminal, ExternalLink, Download, FileText, Sparkles
+  FileText, Sparkles
 } from "lucide-react";
-import Magnetic from "@/components/ui/Magnetic";
+import AirplaneReveal from "@/components/ui/AirplaneReveal";
+import DriftingAirplanes from "@/components/ui/DriftingAirplanes";
 
 export default function PriyanshiProfile() {
+  const [isIntroPlaying, setIsIntroPlaying] = useState(true);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -92,34 +95,50 @@ export default function PriyanshiProfile() {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]/90 pt-28 pb-20 grid-bg relative">
-      {/* Background glow elements */}
-      <div className="glow-spot w-[400px] h-[400px] bg-violet-600/10 top-[-10%] left-[-10%]" />
-      <div className="glow-spot w-[400px] h-[400px] bg-cyan-600/10 bottom-[10%] right-[-10%]" />
+    <>
+      <AnimatePresence mode="wait">
+        {isIntroPlaying && (
+          <AirplaneReveal
+            name="PRIYANSHI"
+            colorTheme="violet"
+            onComplete={() => setIsIntroPlaying(false)}
+          />
+        )}
+      </AnimatePresence>
 
-      <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
-        
-        {/* Floating Back to Home button */}
-        <div className="mb-12">
-          <Link href="/">
-            <span className="inline-flex items-center gap-2 text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors duration-200 group cursor-pointer">
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-              <span>BACK TO STUDIO</span>
-            </span>
-          </Link>
-        </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isIntroPlaying ? 0 : 1 }}
+        transition={{ duration: 0.5 }}
+        className="min-h-screen bg-[var(--background)] text-[var(--foreground)]/90 pt-28 pb-20 grid-bg relative overflow-hidden"
+      >
+        <DriftingAirplanes />
 
-        {/* Profile Intro Header */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid md:grid-cols-12 gap-8 items-start mb-16"
-        >
-          {/* Left Column (Main Info) */}
-          <div className="md:col-span-8 space-y-6">
+        {/* Background glow elements */}
+        <div className="glow-spot w-[400px] h-[400px] bg-violet-600/10 top-[-10%] left-[-10%]" />
+        <div className="glow-spot w-[400px] h-[400px] bg-cyan-600/10 bottom-[10%] right-[-10%]" />
+
+        <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
+          
+          {/* Floating Back to Home button */}
+          <div className="mb-12">
+            <Link href="/">
+              <span className="inline-flex items-center gap-2 text-xs font-mono text-[var(--muted-text)] hover:text-[var(--foreground)] transition-colors duration-200 group cursor-pointer">
+                <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                <span>BACK TO STUDIO</span>
+              </span>
+            </Link>
+          </div>
+
+          {/* Profile Intro Header */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-6 mb-16"
+          >
             <motion.div variants={itemVariants} className="space-y-2">
-              <span className="text-xs font-mono tracking-widest text-cyan-400 uppercase flex items-center gap-2">
+              <span className="text-xs font-mono tracking-widest text-violet-400 uppercase flex items-center gap-2">
                 <Sparkles size={12} />
                 <span>MERN STACK DEVELOPER</span>
               </span>
@@ -137,14 +156,14 @@ export default function PriyanshiProfile() {
               className="flex flex-wrap gap-4 text-xs font-mono text-[var(--muted-text)]"
             >
               <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)]">
-                <MapPin size={12} className="text-cyan-400" />
+                <MapPin size={12} className="text-violet-400" />
                 <span>Jodhpur, Rajasthan</span>
               </div>
               <a 
                 href="mailto:priyanshiagarwal233@gmail.com"
-                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] hover:border-violet-500/50 hover:text-[var(--foreground)] transition-all"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[var(--card)] border border-[var(--border)] hover:border-cyan-500/50 hover:text-[var(--foreground)] transition-all"
               >
-                <Mail size={12} className="text-violet-400" />
+                <Mail size={12} className="text-cyan-400" />
                 <span>priyanshiagarwal233@gmail.com</span>
               </a>
               <a 
@@ -157,33 +176,7 @@ export default function PriyanshiProfile() {
                 <span>github.com/pihu-cloud</span>
               </a>
             </motion.div>
-          </div>
-
-          {/* Right Column (CTAs) */}
-          <motion.div 
-            variants={itemVariants} 
-            className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-4 md:items-end justify-end h-full"
-          >
-            <Magnetic>
-              <a
-                href="mailto:priyanshiagarwal233@gmail.com"
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold font-mono text-xs tracking-widest uppercase transition-all duration-300 shadow-lg shadow-violet-500/10 flex items-center justify-center gap-2"
-              >
-                <Mail size={14} />
-                <span>HIRE PRIYANSHI</span>
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <button
-                onClick={() => window.print()}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-[var(--border)] hover:border-[var(--border-hover)] text-[var(--foreground)] font-bold font-mono text-xs tracking-widest uppercase hover:bg-[var(--card-hover)] transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                <Download size={14} />
-                <span>DOWNLOAD RESUME</span>
-              </button>
-            </Magnetic>
           </motion.div>
-        </motion.div>
 
         {/* Professional Summary */}
         <motion.div
@@ -296,7 +289,7 @@ export default function PriyanshiProfile() {
                 <div key={hack.title} className="glass-panel p-6 rounded-2xl border border-[var(--border)]">
                   <div className="flex justify-between items-start gap-4 mb-2">
                     <h3 className="text-sm font-bold text-[var(--foreground)]">{hack.title}</h3>
-                    <span className="text-[10px] font-mono text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded uppercase font-bold shrink-0">
+                    <span className="text-[10px] font-mono text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded uppercase font-bold shrink-0">
                       {hack.date}
                     </span>
                   </div>
@@ -336,7 +329,7 @@ export default function PriyanshiProfile() {
               <div className="glass-panel p-6 rounded-2xl border border-[var(--border)]">
                 <div className="flex justify-between items-start gap-4 mb-2">
                   <h3 className="text-sm font-bold text-[var(--foreground)]">NPTEL Elite Certification</h3>
-                  <span className="text-[9px] text-violet-400 bg-violet-400/10 px-2 py-0.5 rounded font-bold shrink-0">
+                  <span className="text-[9px] text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded font-bold shrink-0">
                     Score: 62%
                   </span>
                 </div>
@@ -348,6 +341,7 @@ export default function PriyanshiProfile() {
         </div>
 
       </div>
-    </div>
+    </motion.div>
+    </>
   );
 }

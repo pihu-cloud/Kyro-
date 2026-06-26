@@ -214,7 +214,10 @@ export default function Navbar() {
                 className="mt-8 pt-8 border-t border-slate-200 dark:border-white/5 flex flex-col gap-4 font-mono text-sm text-[var(--muted-text)]"
               >
                 <div>
-                  <span className="text-violet-400 font-semibold">Email:</span> hello@kyro.dev
+                  <span className="text-violet-400 font-semibold">Email:</span>{" "}
+                  <a href="mailto:kyro.builds306@gmail.com" className="hover:text-[var(--foreground)] transition-colors duration-200">
+                    kyro.builds306@gmail.com
+                  </a>
                 </div>
                 <div className="flex gap-4 text-xs tracking-widest uppercase">
                   <a href="#" className="hover:text-[var(--foreground)] transition-colors duration-200">GitHub</a>

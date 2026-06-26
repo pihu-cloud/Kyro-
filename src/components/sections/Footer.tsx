@@ -129,7 +129,7 @@ export default function Footer() {
             </Magnetic>
             <Magnetic>
               <a 
-                href="mailto:hello@kyro.dev" 
+                href="mailto:kyro.builds306@gmail.com" 
                 className="hover:text-[var(--foreground)] transition-colors"
                 aria-label="Email"
               >

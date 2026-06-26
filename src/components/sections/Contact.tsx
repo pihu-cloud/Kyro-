@@ -2,7 +2,7 @@
 
 import { useState, useRef, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Check, Mail, Github, Linkedin, ArrowUpRight } from "lucide-react";
+import { Send, Check, Mail, Phone, ArrowUpRight } from "lucide-react";
 import Magnetic from "../ui/Magnetic";
 
 export default function Contact() {
@@ -122,7 +122,7 @@ export default function Contact() {
               <div className="flex flex-col gap-4">
                 {/* Email */}
                 <a
-                  href="mailto:hello@kyro.dev"
+                  href="mailto:kyro.builds306@gmail.com"
                   className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--card-hover)] hover:border-violet-500/50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3">
@@ -131,45 +131,24 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="text-[10px] font-mono text-[var(--muted-text)]/70 uppercase">Email Us</div>
-                      <div className="text-sm font-bold text-[var(--foreground)] group-hover:text-violet-300 transition-colors">hello@kyro.dev</div>
+                      <div className="text-sm font-bold text-[var(--foreground)] group-hover:text-violet-300 transition-colors">kyro.builds306@gmail.com</div>
                     </div>
                   </div>
                   <ArrowUpRight size={16} className="text-[var(--muted-text)] group-hover:text-[var(--foreground)] transition-colors" />
                 </a>
 
-                {/* Github */}
+                {/* Phone */}
                 <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="tel:+919602151101"
                   className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--card-hover)] hover:border-cyan-500/50 transition-all duration-300 group"
                 >
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-[var(--border)] rounded-lg text-cyan-400 group-hover:text-[var(--foreground)] transition-colors">
-                      <Github size={18} />
+                      <Phone size={18} />
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono text-[var(--muted-text)]/70 uppercase">Explore Code</div>
-                      <div className="text-sm font-bold text-[var(--foreground)] group-hover:text-cyan-300 transition-colors">github.com/kyro-studio</div>
-                    </div>
-                  </div>
-                  <ArrowUpRight size={16} className="text-[var(--muted-text)] group-hover:text-[var(--foreground)] transition-colors" />
-                </a>
-
-                {/* Linkedin */}
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 rounded-xl border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--card-hover)] hover:border-fuchsia-500/50 transition-all duration-300 group"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-[var(--border)] rounded-lg text-fuchsia-400 group-hover:text-[var(--foreground)] transition-colors">
-                      <Linkedin size={18} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] font-mono text-[var(--muted-text)]/70 uppercase">Connect</div>
-                      <div className="text-sm font-bold text-[var(--foreground)] group-hover:text-fuchsia-300 transition-colors">linkedin.com/company/kyro-studio</div>
+                      <div className="text-[10px] font-mono text-[var(--muted-text)]/70 uppercase">Call or Text</div>
+                      <div className="text-sm font-bold text-[var(--foreground)] group-hover:text-cyan-300 transition-colors">+91 96021 51101</div>
                     </div>
                   </div>
                   <ArrowUpRight size={16} className="text-[var(--muted-text)] group-hover:text-[var(--foreground)] transition-colors" />
